@@ -17,6 +17,11 @@ public class Filtering {
     @Test
     public void filter() throws Exception {
         List<Car> cars = MockData.getCars();
+        List<Car> carsLessThan20k = cars.stream()
+                .filter(car -> car.getPrice() < 20_000.00)
+                .filter(car -> car.getColor().equals("Yellow"))
+                .collect(Collectors.toList());
+        carsLessThan20k.forEach(System.out::println);
     }
 
     @Test
@@ -42,6 +47,10 @@ public class Filtering {
     @Test
     public void findFirst() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        String a = "alma";
+        String b = a;
+        a = "körte";
+        System.out.println("a: " + a + " - b: " + b);
     }
 
     @Test
