@@ -27,9 +27,19 @@ public class IntStreams {
     @Test
     public void rangeIteratingLists() throws Exception {
         List<Person> people = MockData.getPeople();
+        IntStream.range(0, people.size())
+                .limit(10)
+                .forEach(index -> System.out.println(people.get(index)));
     }
 
     @Test
     public void intStreamIterate()  {
+        // inUnaryOperator adja meg, hogy hogyan növelje az értéket
+        IntStream.iterate(0, value -> value + 1)
+                .limit(10)
+                .forEach(System.out::println);
     }
+
+    // LongStream, DoubleStream
+
 }
