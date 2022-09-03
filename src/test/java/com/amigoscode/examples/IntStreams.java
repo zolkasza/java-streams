@@ -13,6 +13,14 @@ public class IntStreams {
 
     @Test
     public void range() throws Exception {
+        System.out.println("with for");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i);
+        }
+        System.out.println("with int stream exclusive");
+        IntStream.range(0, 10).forEach(value -> System.out.println(value));
+        System.out.println("with int stream inclusive");
+        IntStream.rangeClosed(0, 10).forEach(value -> System.out.println(value));
     }
 
     // Loop through people using IntStream
