@@ -31,6 +31,9 @@ public class Filtering {
                 .forEach(n -> System.out.print(n + " "));
         System.out.println();
         System.out.println("using dropWhile");
+        // Ha egyszer nem teljesül a feltétel akkor az utána lévőket tartja meg
+        Stream.of(2, 4, 6, 8, 9, 10, 12).dropWhile(n -> n % 2 == 0)
+                .forEach(n -> System.out.print(n + " "));
     }
 
     @Test
@@ -39,33 +42,45 @@ public class Filtering {
         System.out.println("using filter");
         Stream.of(2, 4, 6, 8, 9, 10, 12).filter(n -> n % 2 == 0)
                 .forEach(n -> System.out.print(n + " "));
-
         System.out.println();
         System.out.println("using take while");
+        // Ha egyszer nem teljesül a feltétel akkor végez
+        Stream.of(2, 4, 6, 8, 9, 10, 12).takeWhile(n -> n % 2 == 0)
+                .forEach(n -> System.out.print(n + " "));
     }
 
     @Test
     public void findFirst() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        String a = "alma";
-        String b = a;
-        a = "körte";
-        System.out.println("a: " + a + " - b: " + b);
+        // Megkeresi az elsőt, ha nem találja akkor a -1gyel tér vissza
+        int result = Arrays.stream(numbers).filter(n -> n == 30)
+                .findFirst()
+                .orElse(-1);
+        System.out.println(result);
     }
 
     @Test
     public void findAny() throws Exception {
+        // findAny nem tesz különbséget, hogy melyiket találja meg. Ha egyformák az elemek akkor valamelyiket.
         int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10};
+        int result = Arrays.stream(numbers).filter(n -> n == 9)
+                .findAny()
+                .orElse(-1);
+        System.out.println(result);
     }
 
     @Test
     public void allMatch() throws Exception {
-        int[] even = {2, 4, 6, 8, 10};
+        int[] even = {2, 4, 6, 8, 10, 11};
+        boolean allMatch = Arrays.stream(even).allMatch(n -> n % 2 == 0);
+        System.out.println(allMatch);
     }
 
     @Test
     public void anyMatch() throws Exception {
         int[] evenAndOneOdd = {2, 4, 6, 8, 10, 11};
+        boolean anyMatch = Arrays.stream(evenAndOneOdd).anyMatch(n -> !(n % 2 == 0));
+        System.out.println(anyMatch);
     }
 
 }
