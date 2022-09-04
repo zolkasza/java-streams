@@ -16,11 +16,17 @@ public class UnderstandingStreams {
         List<String> emails = MockData.getPeople()
                 .stream()
                 .map(Person::getEmail)
-                .collect(
-                        ArrayList::new,
-                        ArrayList::add,
-                        ArrayList::addAll
-                );
+                //.collect(Collectors.toList()) igazából ez:
+//                .collect(() -> new ArrayList<String>(),
+//                        (list, element) -> list.add(element),
+//                        (lsit1, list2) -> lsit1.addAll(list2));
+                // egyszerűsítve:
+//                .collect(
+//                        ArrayList::new,
+//                        ArrayList::add,
+//                        ArrayList::addAll
+//                );
+                .collect(Collectors.toList());
         emails.forEach(System.out::println);
     }
 
@@ -41,6 +47,7 @@ public class UnderstandingStreams {
                             System.out.println("mapping price " + price);
                             return price + (price * .14);
                         })
+                // csak akkor fut le ha van terminal operátor (pl collect)
                         .collect(Collectors.toList())
         );
     }
